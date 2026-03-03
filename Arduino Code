@@ -1,0 +1,72 @@
+// ===============================
+// Bluetooth Home Automation
+// Arduino UNO + HC-05 + 4 Relay
+// ===============================
+
+// Relay pin definitions
+const int relayPins[4] = {8, 9, 10, 11};
+
+// Number of relays
+const int totalRelays = 4;
+
+void setup() {
+  Serial.begin(9600);
+
+  // Initialize relay pins
+  for (int i = 0; i < totalRelays; i++) {
+    pinMode(relayPins[i], OUTPUT);
+    digitalWrite(relayPins[i], HIGH);  // HIGH = OFF (for active LOW relay)
+  }
+
+  Serial.println("System Ready");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+    processCommand(command);
+  }
+}
+
+// ===============================
+// Command Processing Function
+// ===============================
+void processCommand(char cmd) {
+
+  switch (cmd) {
+
+    case 'A': digitalWrite(relayPins[0], LOW);  break;  // Relay 1 ON
+    case 'a': digitalWrite(relayPins[0], HIGH); break;  // Relay 1 OFF
+
+    case 'B': digitalWrite(relayPins[1], LOW);  break;
+    case 'b': digitalWrite(relayPins[1], HIGH); break;
+
+    case 'C': digitalWrite(relayPins[2], LOW);  break;
+    case 'c': digitalWrite(relayPins[2], HIGH); break;
+
+    case 'D': digitalWrite(relayPins[3], LOW);  break;
+    case 'd': digitalWrite(relayPins[3], HIGH); break;
+
+    case 'X': allRelaysON();  break;
+    case 'x': allRelaysOFF(); break;
+
+    default:
+      Serial.println("Invalid Command");
+      break;
+  }
+}
+
+// ===============================
+// Utility Functions
+// ===============================
+void allRelaysON() {
+  for (int i = 0; i < totalRelays; i++) {
+    digitalWrite(relayPins[i], LOW);
+  }
+}
+
+void allRelaysOFF() {
+  for (int i = 0; i < totalRelays; i++) {
+    digitalWrite(relayPins[i], HIGH);
+  }
+}
