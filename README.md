@@ -1,8 +1,8 @@
 # Bluetooth-Based Home Automation using Arduino UNO
 
 <p align="center">
-  <img src="Image1.jpg" width="450"/>
-  <img src="Image2.jpg" width="450"/>
+  <img src="Image1.jpeg" width="450"/>
+  <img src="Image2.jpeg" width="450"/>
 </p>
 
 ## Overview
